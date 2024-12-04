@@ -6,7 +6,7 @@ function ChooseFileStep({ children, setPickedFile }) {
     <div className="candidate-details-step">
       <div className="form-group">
         <label>
-          בחר קובץ וורד:
+          בחר קובץ וורד או pdf:
           <input
             type="file"
             name="file"

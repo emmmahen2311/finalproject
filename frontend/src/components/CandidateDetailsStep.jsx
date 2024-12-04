@@ -1,8 +1,14 @@
 import React from "react";
+import './CandidateDetailsStep.css'
 
 function CandidateDetailsStep({ children, candidate, setCandidate }) {
+  console.log(candidate);
+  
   const handleChange = (event) => {
     const { name, type, value, checked } = event.target;
+    console.log(name);
+    
+    
     type === "checkbox"
       ? setCandidate((prev) => ({
           ...prev,
@@ -31,10 +37,17 @@ function CandidateDetailsStep({ children, candidate, setCandidate }) {
         <label>
           שנות ניסיון:
           <input
+            min={0}
+            max={30}
             type="number"
             name="שנות ניסיון"
             value={candidate["שנות ניסיון"]}
-            onChange={handleChange}
+            onChange={(event =>{
+              if(+event.target.value >= 0 && +event.target.value <= 30)
+                handleChange(event)
+              else
+                alert(`${event.target.name} חייב להיות בין 0 ל 30`);
+            })}
             className="form-input"
           />
         </label>
@@ -53,25 +66,27 @@ function CandidateDetailsStep({ children, candidate, setCandidate }) {
         </label>
         <label>
           בטיחות:
-          <input
-            type="checkbox"
-            name="בטיחות"
-            onChange={handleChange}
-            className="form-checkbox"
-            value={candidate.בטיחות}
-            checked={candidate.בטיחות ? true : false}
-          />
+          <select
+           name="בטיחות"
+           onChange={handleChange}
+           className="form-checkbox"
+           value={candidate.בטיחות}
+          >
+            <option vallue="true">כן</option>
+            <option vallue="false">לא</option>
+          </select>
         </label>
         <label>
           101:
-          <input
-            type="checkbox"
-            name="'101'"
-            onChange={handleChange}
-            className="form-checkbox"
-            value={candidate["'101'"]}
-            checked={candidate["'101'"] ? true : false}
-          />
+          <select
+           name="'101'"
+           onChange={handleChange}
+           className="form-checkbox"
+           value={candidate["'101'"]}
+          >
+            <option vallue="true">כן</option>
+            <option vallue="false">לא</option>
+          </select>          
         </label>
       </div>
       <div className="form-group">

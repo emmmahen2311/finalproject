@@ -53,22 +53,20 @@ function AddCandidate() {
     switch (step) {
       case 1:
         return (
-          <JobRoleStep
-            candidate={candidate}
-            setCandidate={setCandidate}
-            children={
-              <ButtonGroup
-                handlePrevious={handlePrevious}
-                handleNext={handleNext}
-                step={step}
-                isSummary={isSummary}
-              />
-            }
-          />
-        );
+          <ChooseFileStep setPickedFile={setFile}
+          
+          children={
+            <ButtonGroup
+              handlePrevious={handlePrevious}
+              handleNext={handleNext}
+              step={step}
+              isSummary={isSummary}
+            />
+          }/>
+        )       
       case 2:
         return (
-          <CandidateDetailsStep
+          <JobRoleStep
             candidate={candidate}
             setCandidate={setCandidate}
             children={
@@ -83,7 +81,7 @@ function AddCandidate() {
         );
       case 3:
         return (
-          <GradeAndExperienceStep
+          <CandidateDetailsStep
             candidate={candidate}
             setCandidate={setCandidate}
             children={
@@ -98,7 +96,7 @@ function AddCandidate() {
         );
       case 4:
         return (
-          <AdditionalInfoStep
+          <GradeAndExperienceStep
             candidate={candidate}
             setCandidate={setCandidate}
             children={
@@ -113,17 +111,20 @@ function AddCandidate() {
         );
       case 5:
         return (
-          <ChooseFileStep setPickedFile={setFile}
-          
-          children={
-            <ButtonGroup
-              handlePrevious={handlePrevious}
-              handleNext={handleNext}
-              step={step}
-              isSummary={isSummary}
-            />
-          }/>
-        )  
+          <AdditionalInfoStep
+            candidate={candidate}
+            setCandidate={setCandidate}
+            children={
+              <ButtonGroup
+                handlePrevious={handlePrevious}
+                handleNext={handleNext}
+                step={step}
+                isSummary={isSummary}
+              />
+            }
+          />
+        );
+       
       default:
         return null;
     }
@@ -154,11 +155,12 @@ function AddCandidate() {
       formData.append("file", file)
       const uploadResponse = await axios.post(BASE_URL + '/upload_file', formData)
 
-      const text = uploadResponse.data
+      const text = uploadResponse.data.text
+      const candidateId = uploadResponse.data.candidateId
       const response = await axios.post(
         BASE_URL + "/insert_candidate",
         {
-          candidate: {...candidate, resume:text },
+          candidate: {...candidate, resume:text, candidateId },
         },
         {
           withCredentials: true,

@@ -8,7 +8,56 @@ import ExportButton from "./ExportButton";
 import { handleMessage } from "./LoginPage";
 import Alert from "@mui/material/Alert";
 
+const today = new Date().toISOString().split("T")[0];
+const dummy = [
+  {
+    שם: "aaa",
+    תפקיד: "arole",
+    "סיכום שיחת טלפון": "aaa",
+    "תאריך שיחת טלפון": today,
+    "סיכום ריאיון": "a",
+    "שנות ניסיון": 0,
+    "סיווג ביטחוני": false,
+    בטיחות: false,
+    "'101'": false,
+    "תאריך ריאיון": today,
+    ציון: 0,
+    "ניסיון בשטח": "3",
+    "מידע נוסף": "aaa",
+  },
+  {
+    שם: "ccc",
+    תפקיד: "crole",
+    "סיכום שיחת טלפון": "aaa",
+    "תאריך שיחת טלפון": today,
+    "סיכום ריאיון": "a",
+    "שנות ניסיון": 0,
+    "סיווג ביטחוני": false,
+    בטיחות: false,
+    "'101'": false,
+    "תאריך ריאיון": today,
+    ציון: 0,
+    "ניסיון בשטח": "3",
+    "מידע נוסף": "aaa",
+  },
+  {
+    שם: "BBB",
+    תפקיד: "brole",
+    "סיכום שיחת טלפון": "aaa",
+    "תאריך שיחת טלפון": today,
+    "סיכום ריאיון": "a",
+    "שנות ניסיון": 0,
+    "סיווג ביטחוני": false,
+    בטיחות: false,
+    "'101'": false,
+    "תאריך ריאיון": today,
+    ציון: 0,
+    "ניסיון בשטח": "3",
+    "מידע נוסף": "aaa",
+  },
+]
 function AllCandidates() {
+  const [candidateFilter, setCandidateFilter] = useState({ filterType: 'byType', filterValue: '' });
   const [message, setMessage] = useState("");
   const [candidatesList, setCandidatesList] = useState([]);
   const [editingCandidate, setEditingCandidate] = useState(null);
@@ -104,6 +153,23 @@ function AllCandidates() {
     }
   };
 
+  const filterCandidates = () => {
+    if (candidateFilter.filterValue.length === 0)
+      return candidatesList;
+    
+    if (candidateFilter.filterType === "byName"){
+      console.log('h1', candidateFilter.filterValue);
+      return candidatesList.filter(c => c.שם.toLowerCase().includes(candidateFilter.filterValue.toLowerCase()));
+    }
+    if (candidateFilter.filterType === "byType"){
+      return candidatesList.filter(c => c.תפקיד.toLowerCase().includes(candidateFilter.filterValue.toLowerCase()));
+    }
+  }
+  const handleFilterChange = (event) => {
+    const { name, value } = event.target;
+
+    setCandidateFilter(prev => ({ ...prev, [name]: value }))
+  }
   useEffect(() => {
     getAllCandidates(); // Fetch candidates on component mount
   }, []);
@@ -114,7 +180,15 @@ function AllCandidates() {
         <img src={gvkLogo} alt="GVK Logo" className="logo" />
       </div>
       <Navbar />
-      {candidatesList.length > 0 ? (
+      <div>
+        <select name="filterType" value={candidateFilter.filterType} onChange={handleFilterChange}>
+          <option value="byType">סוג משרה</option>
+          <option value="byName">שם מועמד</option>
+        </select>
+        <input type="text" name="filterValue" value={candidateFilter.filterValue} onChange={handleFilterChange} style={{width:'9rem'}}/>
+        <button type="button" onClick={() => setCandidateFilter({ filterType: 'byType', filterValue: '' })}>נקה סינון</button>
+      </div>
+      {filterCandidates().length > 0 ? (
         <div className="table-container">
           <div>
             {message && <Alert severity="success">{message}</Alert>}
@@ -136,12 +210,12 @@ function AllCandidates() {
                 <th>ציון</th>
                 <th>ניסיון בשטח</th>
                 <th>מידע נוסף</th>
-                <th>/</th>
-                <th>#</th>
+                <th>&#128465;</th>
+                <th>&#128221;</th>
               </tr>
             </thead>
             <tbody className="tbody">
-              {candidatesList.map((candidate, index) => (
+              {filterCandidates().map((candidate, index) => (
                 <tr key={index}>
                   {editingCandidate === candidate._id ? (
                     <>
