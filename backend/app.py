@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, send_from_directory
 from flask_cors import CORS
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
 from flask import render_template, redirect, url_for
@@ -97,6 +97,12 @@ class User(UserMixin):
 
     def get_id(self):
         return self.id
+
+
+@app.route("/download_file/<path:filename>", methods=["GET"])
+def download_file(filename):
+    print(filename)
+    return send_from_directory(".", filename)
 
 @app.route("/upload_file", methods=["POST"])
 def upload_file():

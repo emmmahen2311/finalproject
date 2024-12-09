@@ -158,7 +158,6 @@ function AllCandidates() {
       return candidatesList;
     
     if (candidateFilter.filterType === "byName"){
-      console.log('h1', candidateFilter.filterValue);
       return candidatesList.filter(c => c.שם.toLowerCase().includes(candidateFilter.filterValue.toLowerCase()));
     }
     if (candidateFilter.filterType === "byType"){
@@ -210,6 +209,7 @@ function AllCandidates() {
                 <th>ציון</th>
                 <th>ניסיון בשטח</th>
                 <th>מידע נוסף</th>
+                <th>קו"ח</th>
                 <th>&#128465;</th>
                 <th>&#128221;</th>
               </tr>
@@ -324,6 +324,7 @@ function AllCandidates() {
                           onChange={(e) => handleFieldChange(e, "מידע נוסף")}
                         />
                       </td>
+                      <td><a href={`${BASE_URL}/download_file/${candidate.fileName}`}>הצג קו"ח</a></td>
                       <td className="button-td">
                         <button
                           onClick={() => saveUpdatedCandidate(candidate._id)}
@@ -350,6 +351,7 @@ function AllCandidates() {
                       <td>{candidate.ציון}</td>
                       <td>{candidate["ניסיון בשטח"]}</td>
                       <td>{candidate["מידע נוסף"]}</td>
+                      <td><a href={`${BASE_URL}/download_file/${candidate.fileName}`}>הצג קו"ח</a></td>
                       <td>
                         <button onClick={() => handleEdit(candidate)}>
                           ערוך
