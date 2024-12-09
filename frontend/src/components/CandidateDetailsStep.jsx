@@ -72,8 +72,8 @@ function CandidateDetailsStep({ children, candidate, setCandidate }) {
            className="form-checkbox"
            value={candidate.בטיחות}
           >
-            <option vallue="true">כן</option>
-            <option vallue="false">לא</option>
+            <option value="true">כן</option>
+            <option value="false">לא</option>
           </select>
         </label>
         <label>
@@ -84,8 +84,8 @@ function CandidateDetailsStep({ children, candidate, setCandidate }) {
            className="form-checkbox"
            value={candidate["'101'"]}
           >
-            <option vallue="true">כן</option>
-            <option vallue="false">לא</option>
+            <option value="true">כן</option>
+            <option value="false">לא</option>
           </select>          
         </label>
       </div>
