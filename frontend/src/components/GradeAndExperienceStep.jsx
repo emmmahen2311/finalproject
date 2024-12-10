@@ -43,6 +43,7 @@ function GradeAndExperienceStep({ children, candidate, setCandidate }) {
             value={candidate["ניסיון בשטח"]}
             onChange={handleChange}
             className="form-textarea"
+            maxLength={150}
           />
         </label>
         {children}

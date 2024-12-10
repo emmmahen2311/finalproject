@@ -18,7 +18,7 @@ function AdditionalInfoStep({ children, candidate, setCandidate }) {
           value={candidate["מידע נוסף"]}
           onChange={handleChange}
           className="form-textarea"
-          maxLength={40}
+          maxLength={150}
         />
       </label>
       {children}

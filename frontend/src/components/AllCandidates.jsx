@@ -169,6 +169,7 @@ function AllCandidates() {
 
     setCandidateFilter(prev => ({ ...prev, [name]: value }))
   }
+  const displayBool = (value) => value == "true" ? 'כן' : 'לא'
   useEffect(() => {
     getAllCandidates(); // Fetch candidates on component mount
   }, []);
@@ -179,7 +180,7 @@ function AllCandidates() {
         <img src={gvkLogo} alt="GVK Logo" className="logo" />
       </div>
       <Navbar />
-      <div>
+      <div className="filter">
         <select name="filterType" value={candidateFilter.filterType} onChange={handleFilterChange}>
           <option value="byType">סוג משרה</option>
           <option value="byName">שם מועמד</option>
@@ -210,8 +211,8 @@ function AllCandidates() {
                 <th>ניסיון בשטח</th>
                 <th>מידע נוסף</th>
                 <th>קו"ח</th>
-                <th>&#128465;</th>
                 <th>&#128221;</th>
+                <th>&#128465;</th>
               </tr>
             </thead>
             <tbody className="tbody">
@@ -324,7 +325,7 @@ function AllCandidates() {
                           onChange={(e) => handleFieldChange(e, "מידע נוסף")}
                         />
                       </td>
-                      <td><a href={`${BASE_URL}/download_file/${candidate.fileName}`}>הצג קו"ח</a></td>
+                      <td><a href={`${BASE_URL}/download_file/${candidate.fileName}`} target="_blank">הצג קו"ח</a></td>
                       <td className="button-td">
                         <button
                           onClick={() => saveUpdatedCandidate(candidate._id)}
@@ -344,14 +345,14 @@ function AllCandidates() {
                       <td>{candidate["תאריך שיחת טלפון"]}</td>
                       <td>{candidate["סיכום ריאיון"]}</td>
                       <td>{candidate["שנות ניסיון"]}</td>
-                      <td>{candidate["סיווג ביטחוני"]?.toString()}</td>
-                      <td>{candidate["בטיחות"]?.toString()}</td>
-                      <td>{candidate["'101'"]?.toString()}</td>
+                      <td>{displayBool(candidate["סיווג ביטחוני"]?.toString()) }</td>
+                      <td>{displayBool(candidate["בטיחות"]?.toString())}</td>
+                      <td>{displayBool(candidate["'101'"]?.toString())}</td>
                       <td>{candidate["תאריך ריאיון"]}</td>
                       <td>{candidate.ציון}</td>
                       <td>{candidate["ניסיון בשטח"]}</td>
                       <td>{candidate["מידע נוסף"]}</td>
-                      <td><a href={`${BASE_URL}/download_file/${candidate.fileName}`}>הצג קו"ח</a></td>
+                      <td><a href={`${BASE_URL}/download_file/${candidate.fileName}`} target="_blank">הצג קו"ח</a></td>
                       <td>
                         <button onClick={() => handleEdit(candidate)}>
                           ערוך

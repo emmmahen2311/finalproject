@@ -53,6 +53,7 @@ function JobRoleStep({ children, candidate, setCandidate }) {
             value={candidate["סיכום שיחת טלפון"]}
             onChange={handleChange}
             className="form-textarea"
+            maxLength={150}
           />
         </label>
       </div>

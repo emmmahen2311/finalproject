@@ -29,10 +29,14 @@
 .candidate-summary-label {
   font-weight: bold;
   color: #333333;
+  white-space: nowrap;
 }
 
 .candidate-summary-value {
   color: #555555;
+  text-align: end;
+  height:1.5rem;
+  overflow-y:auto
 }
 
 .login-page {

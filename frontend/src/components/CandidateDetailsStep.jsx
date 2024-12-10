@@ -30,6 +30,7 @@ function CandidateDetailsStep({ children, candidate, setCandidate }) {
             value={candidate["סיכום ריאיון"]}
             onChange={handleChange}
             className="form-textarea"
+            maxLength={150}
           />
         </label>
       </div>
