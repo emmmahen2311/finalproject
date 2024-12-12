@@ -110,7 +110,7 @@ def upload_file():
         return "No file part in the request", 400
 
     file = request.files["file"]
-
+    
     if file.filename == "":
         return "No selected file", 400
 
@@ -120,15 +120,18 @@ def upload_file():
     # Save the file temporarily
     file_path = os.path.join("temp", file.filename)
     file.save(file_path)
-    candidate_file = {"fileName":file_path}
-    candidate_id = candidates.insert_one(candidate_file)
-    # Process file based on type
+    
+     # Process file based on type
     if file.filename.endswith(".pdf"):
         text = read_pdf(file_path)
     elif file.filename.endswith(".docx"):
         text = read_docx(file_path)
     else:
         return "Unsupported file type", 400
+    
+    candidate_file = {"fileName":file_path}
+    candidate_id = candidates.insert_one(candidate_file)
+
     print(candidate_id.inserted_id)
     return jsonify({"text": text, "candidateId":candidate_id.inserted_id.__str__()}), 200
     #return text
