@@ -240,13 +240,15 @@ function AllCandidates() {
                         </select>
                       </td>
                       <td>
-                        <input
+                        <textarea
                           type="text"
+                          rows={3}
+                          maxLength={150}
                           value={formData["סיכום שיחת טלפון"]}
                           onChange={(e) =>
                             handleFieldChange(e, "סיכום שיחת טלפון")
                           }
-                        />
+                        ></textarea>
                       </td>
                       <td>
                         <input
@@ -258,11 +260,13 @@ function AllCandidates() {
                         />
                       </td>
                       <td>
-                        <input
+                        <textarea
                           type="text"
+                          maxLength={150}
+                          rows={3}
                           value={formData["סיכום ריאיון"]}
                           onChange={(e) => handleFieldChange(e, "סיכום ריאיון")}
-                        />
+                        ></textarea>
                       </td>
                       <td>
                         <input
@@ -312,18 +316,22 @@ function AllCandidates() {
                         />
                       </td>
                       <td>
-                        <input
+                        <textarea
                           type="text"
+                          maxLength={150}
+                          rows={3}
                           value={formData["ניסיון בשטח"]}
                           onChange={(e) => handleFieldChange(e, "ניסיון בשטח")}
-                        />
+                        ></textarea>
                       </td>
                       <td>
-                        <input
+                        <textarea
                           type="text"
+                          maxLength={150}
+                          rows={3}
                           value={formData["מידע נוסף"]}
                           onChange={(e) => handleFieldChange(e, "מידע נוסף")}
-                        />
+                        ></textarea>
                       </td>
                       <td><a href={`${BASE_URL}/download_file/${candidate.fileName}`} target="_blank">הצג קו"ח</a></td>
                       <td className="button-td">
