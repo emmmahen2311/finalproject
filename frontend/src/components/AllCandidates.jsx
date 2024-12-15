@@ -349,17 +349,17 @@ function AllCandidates() {
                     <>
                       <td>{candidate.שם}</td>
                       <td>{candidate.תפקיד}</td>
-                      <td>{candidate["סיכום שיחת טלפון"]}</td>
+                      <td><p>{candidate["סיכום שיחת טלפון"]}</p></td>
                       <td>{candidate["תאריך שיחת טלפון"]}</td>
-                      <td>{candidate["סיכום ריאיון"]}</td>
+                      <td><p>{candidate["סיכום ריאיון"]}</p></td>
                       <td>{candidate["שנות ניסיון"]}</td>
                       <td>{displayBool(candidate["סיווג ביטחוני"]?.toString()) }</td>
                       <td>{displayBool(candidate["בטיחות"]?.toString())}</td>
                       <td>{displayBool(candidate["'101'"]?.toString())}</td>
                       <td>{candidate["תאריך ריאיון"]}</td>
                       <td>{candidate.ציון}</td>
-                      <td>{candidate["ניסיון בשטח"]}</td>
-                      <td>{candidate["מידע נוסף"]}</td>
+                      <td><p>{candidate["ניסיון בשטח"]}</p></td>
+                      <td><p>{candidate["מידע נוסף"]}</p></td>
                       <td><a href={`${BASE_URL}/download_file/${candidate.fileName}`} target="_blank">הצג קו"ח</a></td>
                       <td>
                         <button onClick={() => handleEdit(candidate)}>
